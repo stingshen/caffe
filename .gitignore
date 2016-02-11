@@ -98,7 +98,17 @@ LOG*
 CURRENT
 MANIFEST-*
 
+<<<<<<< HEAD
 # some new files add by dxy
 examples/cifar10/*lmdb*
 examples/cifar10/*mat*
 
+=======
+#Visual Studio files
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.pdb
+*.props
+>>>>>>> Add support for windows build
