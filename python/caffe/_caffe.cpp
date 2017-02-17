@@ -44,13 +44,19 @@
 #define BP_GET_POINTER(cls, dtype) \
 namespace boost { \
 template <> \
+<<<<<<< HEAD
 caffe::cls<dtype> const volatile * \
 get_pointer<class caffe::cls<dtype> const volatile >( \
   class caffe::cls<dtype> const volatile *c) { \
+=======
+const volatile caffe::cls * \
+get_pointer(const volatile caffe::cls *c) { \
+>>>>>>> Added nccl ExternalProject to build nccl on Windows
     return c; \
 } \
 }
 
+<<<<<<< HEAD
 BP_GET_POINTER(Net, float);
 BP_GET_POINTER(Layer, float);
 BP_GET_POINTER(Solver, float);
@@ -60,6 +66,27 @@ BP_GET_POINTER(AdaGradSolver, float);
 BP_GET_POINTER(RMSPropSolver, float);
 BP_GET_POINTER(AdaDeltaSolver, float);
 BP_GET_POINTER(AdamSolver, float);
+=======
+#define BP_GET_POINTER_T(cls, dtype) BP_GET_POINTER(cls<dtype>)
+
+// forward declare the NCCL class
+// in case we are not using NCCL
+namespace caffe {
+template <typename Dtype> class NCCL;
+}
+
+BP_GET_POINTER_T(Net, float);
+BP_GET_POINTER_T(Layer, float);
+BP_GET_POINTER_T(Solver, float);
+BP_GET_POINTER_T(SGDSolver, float);
+BP_GET_POINTER_T(NesterovSolver, float);
+BP_GET_POINTER_T(AdaGradSolver, float);
+BP_GET_POINTER_T(RMSPropSolver, float);
+BP_GET_POINTER_T(AdaDeltaSolver, float);
+BP_GET_POINTER_T(AdamSolver, float);
+BP_GET_POINTER_T(NCCL, float);
+BP_GET_POINTER(Timer);
+>>>>>>> Added nccl ExternalProject to build nccl on Windows
 
 #endif
 
