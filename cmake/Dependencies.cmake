@@ -9,6 +9,7 @@ find_package(Boost 1.46 REQUIRED COMPONENTS system thread filesystem)
 <<<<<<< HEAD
 list(APPEND Caffe_INCLUDE_DIRS PUBLIC ${Boost_INCLUDE_DIRS})
 list(APPEND Caffe_LINKER_LIBS PUBLIC ${Boost_LIBRARIES})
+<<<<<<< HEAD
 =======
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 add_definitions(-DBOOST_ALL_NO_LIB)
@@ -19,6 +20,12 @@ if(DEFINED MSVC)
   # We should define this only when necessary,
   # i.e VS 2013 Update 4 or earlier.
   add_definitions(-DBOOST_NO_CXX11_TEMPLATE_ALIASES)
+=======
+
+if(DEFINED MSVC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0.40629.0)
+  # Required for VS 2013 Update 4 or earlier.
+  list(APPEND Caffe_DEFINITIONS PUBLIC -DBOOST_NO_CXX11_TEMPLATE_ALIASES)
+>>>>>>> Fixed wrong VS 2013 Update 5 version string. Fixes #5430
 endif()
 
 # ---[ Threads
