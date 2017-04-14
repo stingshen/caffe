@@ -5,12 +5,24 @@
 - Faster rcnn joint train, test and evaluate
 - Action recognition (Two Stream CNN)
 
+<<<<<<< HEAD
 ## Faster RCNN
+=======
+Caffe is a deep learning framework made with expression, speed, and modularity in mind.
+It is developed by Berkeley AI Research ([BAIR](http://bair.berkeley.edu))/The Berkeley Vision and Learning Center (BVLC) and community contributors.
+>>>>>>> BVLC -> BAIR
 
 ### Disclaimer
 The official Faster R-CNN code (written in MATLAB) is [available](https://github.com/ShaoqingRen/faster_rcnn) here. If your goal is to reproduce the results in our NIPS 2015 paper, please use the [official](https://github.com/ShaoqingRen/faster_rcnn) code.
 
+<<<<<<< HEAD
 This repository contains a C++ reimplementation of the Python code([py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn)). This C++ implementation is built on the offcial [caffe](https://github.com/BVLC/caffe), I will continue to update this code for improvement and up-to-date by offcial caffe.
+=======
+- [DIY Deep Learning for Vision with Caffe](https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh_UiC5G71UMscNPlvArsWER41PsU/edit#slide=id.p)
+- [Tutorial Documentation](http://caffe.berkeleyvision.org/tutorial/)
+- [BAIR reference models](http://caffe.berkeleyvision.org/model_zoo.html) and the [community model zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo)
+- [Installation instructions](http://caffe.berkeleyvision.org/installation.html)
+>>>>>>> BVLC -> BAIR
 
 All following steps, you should do these in the `$CAFFE_ROOT` path.
 
@@ -24,7 +36,12 @@ The list of training data is `examples/FRCNN/dataset/voc2007.trainval`.
 
 The list of testing data is `examples/FRCNN/dataset/voc2007.trainval`.
 
+<<<<<<< HEAD
 Create symlinks for the PASCAL VOC dataset `ln -s $YOUR_VOCdevkit_Path $CAFFE_ROOT/VOCdevkit`.
+=======
+Caffe is released under the [BSD 2-Clause license](https://github.com/BVLC/caffe/blob/master/LICENSE).
+The BAIR/BVLC reference models are released for unrestricted use.
+>>>>>>> BVLC -> BAIR
 
 As shown in VGG example `models/FRCNN/vgg16/train_val.proto`, the original pictures should appear at `$CAFFE_ROOT/VOCdevkit/VOC2007/JPEGImages/`. (Check window\_data\_param in FrcnnRoiData)
 
