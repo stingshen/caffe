@@ -3,12 +3,12 @@ file(GLOB proto_files proto/*.proto)
 caffe_protobuf_generate_cpp_py(${proto_gen_folder} proto_srcs proto_hdrs proto_python ${proto_files})
 
 # include python files either to force generation
-add_library(proto STATIC ${proto_hdrs} ${proto_srcs} ${proto_python})
-caffe_default_properties(proto)
-target_link_libraries(proto PUBLIC ${PROTOBUF_LIBRARIES})
-target_include_directories(proto PUBLIC ${PROTOBUF_INCLUDE_DIR})
+add_library(caffeproto STATIC ${proto_hdrs} ${proto_srcs} ${proto_python})
+caffe_default_properties(caffeproto)
+target_link_libraries(caffeproto PUBLIC ${PROTOBUF_LIBRARIES})
+target_include_directories(caffeproto PUBLIC ${PROTOBUF_INCLUDE_DIR})
 
-list(INSERT Caffe_LINKER_LIBS 0 PUBLIC proto) # note, crucial to prepend!
+list(INSERT Caffe_LINKER_LIBS 0 PUBLIC caffeproto) # note, crucial to prepend!
 
 # --[ Caffe library
 
@@ -103,6 +103,7 @@ configure_file(${caffe_export_hdr_in} ${caffe_export_hdr})
 <<<<<<< HEAD
 install(DIRECTORY ${Caffe_INCLUDE_DIR}/caffe DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES ${proto_hdrs} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/caffe/proto)
+<<<<<<< HEAD
 install(TARGETS caffe proto EXPORT CaffeTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 =======
 install(DIRECTORY ${Caffe_INCLUDE_DIR}/caffe DESTINATION include)
@@ -112,6 +113,9 @@ if(MSVC AND NOT BUILD_SHARED_LIBS)
   install(FILES ${caffe_export_hdr} ${caffe_symbols_hdr} DESTINATION include/caffe)
 endif()
 >>>>>>> Merge cmake changes into latest windows branch
+=======
+install(TARGETS caffe caffeproto EXPORT CaffeTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+>>>>>>> cmake: rename libproto.a -> libcaffeproto.a
 
 file(WRITE ${PROJECT_BINARY_DIR}/__init__.py)
 list(APPEND proto_python ${PROJECT_BINARY_DIR}/__init__.py)
