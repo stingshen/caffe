@@ -35,6 +35,7 @@ foreach(source ${srcs})
 
   # Install
 <<<<<<< HEAD
+<<<<<<< HEAD
   install(TARGETS ${name} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 =======
@@ -44,4 +45,11 @@ foreach(source ${srcs})
     caffe_install_prerequisites(${name} DESTINATION bin)
   endif()
 >>>>>>> Added support for python 3.5
+=======
+  install(TARGETS ${name} DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+  if(MSVC AND INSTALL_PREREQUISITES)
+    caffe_install_prerequisites(${name} DESTINATION ${CMAKE_INSTALL_BINDIR})
+  endif()
+>>>>>>> windows
 endforeach(source)

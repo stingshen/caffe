@@ -41,6 +41,7 @@
 // Workaround for VS 2015 Update 3 which breaks boost python
 // See: http://stackoverflow.com/questions/38261530/unresolved-external-symbols-since-visual-studio-2015-update-3-boost-python-link
 // and https://msdn.microsoft.com/vs-knownissues/vs2015-update3
+<<<<<<< HEAD
 #define BP_GET_POINTER(cls, dtype) \
 namespace boost { \
 template <> \
@@ -52,10 +53,18 @@ get_pointer<class caffe::cls<dtype> const volatile >( \
 const volatile caffe::cls * \
 get_pointer(const volatile caffe::cls *c) { \
 >>>>>>> Added nccl ExternalProject to build nccl on Windows
+=======
+#define BP_GET_POINTER(cls) \
+namespace boost { \
+template <> \
+const volatile caffe::cls * \
+get_pointer(const volatile caffe::cls *c) { \
+>>>>>>> windows
     return c; \
 } \
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 BP_GET_POINTER(Net, float);
 BP_GET_POINTER(Layer, float);
@@ -67,6 +76,8 @@ BP_GET_POINTER(RMSPropSolver, float);
 BP_GET_POINTER(AdaDeltaSolver, float);
 BP_GET_POINTER(AdamSolver, float);
 =======
+=======
+>>>>>>> windows
 #define BP_GET_POINTER_T(cls, dtype) BP_GET_POINTER(cls<dtype>)
 
 // forward declare the NCCL class
@@ -86,7 +97,10 @@ BP_GET_POINTER_T(AdaDeltaSolver, float);
 BP_GET_POINTER_T(AdamSolver, float);
 BP_GET_POINTER_T(NCCL, float);
 BP_GET_POINTER(Timer);
+<<<<<<< HEAD
 >>>>>>> Added nccl ExternalProject to build nccl on Windows
+=======
+>>>>>>> windows
 
 #endif
 
@@ -104,15 +118,24 @@ void set_mode_gpu() { Caffe::set_mode(Caffe::GPU); }
 
 void InitLog() {
   ::google::InitGoogleLogging("");
+#ifndef _MSC_VER
+  // this symbol is undefined on windows
   ::google::InstallFailureSignalHandler();
+#endif  // _MSC_VER
 }
 void InitLogLevel(int level) {
   FLAGS_minloglevel = level;
   InitLog();
 }
+<<<<<<< HEAD
 void InitLogLevelPipe(int level, bool stderr) {
   FLAGS_minloglevel = level;
   FLAGS_logtostderr = stderr;
+=======
+void InitLogLevelPipe(int level, bool std_err) {
+  FLAGS_minloglevel = level;
+  FLAGS_logtostderr = std_err;
+>>>>>>> windows
   InitLog();
 }
 void Log(const string& s) {

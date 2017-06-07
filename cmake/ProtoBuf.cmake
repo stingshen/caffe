@@ -2,7 +2,17 @@
 # the standard cmake script with version and python generation support
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 find_package( Protobuf REQUIRED )
+=======
+if(MSVC)
+  # search using protobuf-config.cmake
+  find_package( Protobuf REQUIRED NO_MODULE)
+  set(PROTOBUF_INCLUDE_DIR ${PROTOBUF_INCLUDE_DIRS})
+else()
+  find_package( Protobuf REQUIRED )
+endif()
+>>>>>>> windows
 list(APPEND Caffe_INCLUDE_DIRS PUBLIC ${PROTOBUF_INCLUDE_DIR})
 list(APPEND Caffe_LINKER_LIBS PUBLIC ${PROTOBUF_LIBRARIES})
 =======

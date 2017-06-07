@@ -6,6 +6,7 @@ endif()
 file(GLOB_RECURSE python_srcs ${PROJECT_SOURCE_DIR}/python/*.cpp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 add_library(pycaffe SHARED ${python_srcs})
 =======
 add_library(pycaffe MODULE ${python_srcs})
@@ -15,8 +16,14 @@ if(MSVC)
   set_target_properties(pycaffe PROPERTIES SUFFIX ".pyd")
 endif()
 >>>>>>> Merge cmake changes into latest windows branch
+=======
+add_library(pycaffe MODULE ${python_srcs})
+>>>>>>> windows
 caffe_default_properties(pycaffe)
 set_target_properties(pycaffe PROPERTIES PREFIX "" OUTPUT_NAME "_caffe")
+if(MSVC)
+  set_target_properties(pycaffe PROPERTIES SUFFIX ".pyd")
+endif()
 target_include_directories(pycaffe PUBLIC ${PYTHON_INCLUDE_DIRS} ${NUMPY_INCLUDE_DIR})
 target_link_libraries(pycaffe PUBLIC ${Caffe_LINK} ${PYTHON_LIBRARIES})
 
