@@ -7,8 +7,8 @@
 # - Python pickle-format data of ImageNet graph structure and relative infogain
 # - the training splits with labels
 
-DIR="$( cd "$(dirname "$0")" ; pwd -P )"
-cd "$DIR"
+# DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+# cd "$DIR"
 
 echo "Downloading..."
 

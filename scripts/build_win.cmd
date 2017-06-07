@@ -4,14 +4,14 @@
 :: Default values
 if DEFINED APPVEYOR (
     echo Setting Appveyor defaults
-    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=14
+    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=141
     if NOT DEFINED WITH_NINJA set WITH_NINJA=1
     if NOT DEFINED CPU_ONLY set CPU_ONLY=1
     if NOT DEFINED CUDA_ARCH_NAME set CUDA_ARCH_NAME=Auto
     if NOT DEFINED CMAKE_CONFIG set CMAKE_CONFIG=Release
     if NOT DEFINED USE_NCCL set USE_NCCL=0
     if NOT DEFINED CMAKE_BUILD_SHARED_LIBS set CMAKE_BUILD_SHARED_LIBS=0
-    if NOT DEFINED PYTHON_VERSION set PYTHON_VERSION=2
+    if NOT DEFINED PYTHON_VERSION set PYTHON_VERSION=3
     if NOT DEFINED BUILD_PYTHON set BUILD_PYTHON=1
     if NOT DEFINED BUILD_PYTHON_LAYER set BUILD_PYTHON_LAYER=1
     if NOT DEFINED BUILD_MATLAB set BUILD_MATLAB=0
@@ -68,12 +68,12 @@ if DEFINED APPVEYOR (
 
 ) else (
     :: Change the settings here to match your setup
-    :: Change MSVC_VERSION to 12 to use VS 2013
-    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=14
+    :: Change MSVC_VERSION to 120 to use VS 2013
+    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=141
     :: Change to 1 to use Ninja generator (builds much faster)
-    if NOT DEFINED WITH_NINJA set WITH_NINJA=1
+    if NOT DEFINED WITH_NINJA set WITH_NINJA=0
     :: Change to 1 to build caffe without CUDA support
-    if NOT DEFINED CPU_ONLY set CPU_ONLY=0
+    if NOT DEFINED CPU_ONLY set CPU_ONLY=1
     :: Change to generate CUDA code for one of the following GPU architectures
     :: [Fermi  Kepler  Maxwell  Pascal  All]
     if NOT DEFINED CUDA_ARCH_NAME set CUDA_ARCH_NAME=Auto
@@ -84,7 +84,7 @@ if DEFINED APPVEYOR (
     :: Change to 1 to build a caffe.dll
     if NOT DEFINED CMAKE_BUILD_SHARED_LIBS set CMAKE_BUILD_SHARED_LIBS=0
     :: Change to 3 if using python 3.5 (only 2.7 and 3.5 are supported)
-    if NOT DEFINED PYTHON_VERSION set PYTHON_VERSION=2
+    if NOT DEFINED PYTHON_VERSION set PYTHON_VERSION=3
     :: Change these options for your needs.
     if NOT DEFINED BUILD_PYTHON set BUILD_PYTHON=1
     if NOT DEFINED BUILD_PYTHON_LAYER set BUILD_PYTHON_LAYER=1
@@ -103,10 +103,13 @@ if DEFINED APPVEYOR (
 :: Use the exclamation mark ! below to delay the
 :: expansion of CMAKE_GENERATOR
 if %WITH_NINJA% EQU 0 (
-    if "%MSVC_VERSION%"=="14" (
+    if "%MSVC_VERSION%"=="141" (
+        set CMAKE_GENERATOR=Visual Studio 15 2017 Win64
+    )
+    if "%MSVC_VERSION%"=="140" (
         set CMAKE_GENERATOR=Visual Studio 14 2015 Win64
     )
-    if "%MSVC_VERSION%"=="12" (
+    if "%MSVC_VERSION%"=="120" (
         set CMAKE_GENERATOR=Visual Studio 12 2013 Win64
     )
     if "!CMAKE_GENERATOR!"=="" (
@@ -151,13 +154,14 @@ if NOT EXIST build mkdir build
 pushd build
 
 :: Setup the environement for VS x64
-set batch_file=!VS%MSVC_VERSION%0COMNTOOLS!..\..\VC\vcvarsall.bat
+set batch_file=!VS%MSVC_VERSION%COMNTOOLS!..\..\VC\Auxiliary\Build\vcvarsall.bat
 call "%batch_file%" amd64
 
 :: Configure using cmake and using the caffe-builder dependencies
 :: Add -DCUDNN_ROOT=C:/Projects/caffe/cudnn-8.0-windows10-x64-v5.1/cuda ^
 :: below to use cuDNN
 cmake -G"!CMAKE_GENERATOR!" ^
+      -C F:\ml\caffe\caffe-builder\build_v141_x64\libraries\caffe-builder-config.cmake ^
       -DBLAS=Open ^
       -DCMAKE_BUILD_TYPE:STRING=%CMAKE_CONFIG% ^
       -DBUILD_SHARED_LIBS:BOOL=%CMAKE_BUILD_SHARED_LIBS% ^
@@ -169,6 +173,8 @@ cmake -G"!CMAKE_GENERATOR!" ^
       -DINSTALL_PREREQUISITES:BOOL=1 ^
       -DUSE_NCCL:BOOL=!USE_NCCL! ^
       -DCUDA_ARCH_NAME:STRING=%CUDA_ARCH_NAME% ^
+      -DOpenCV_DIR:STRING=F:/ml/opencv/build/ ^
+      -DOpenCV_LIB_PATH:STRING=F:/ml/opencv/build/ ^
       "%~dp0\.."
 
 if ERRORLEVEL 1 (
