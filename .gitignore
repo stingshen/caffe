@@ -104,25 +104,16 @@ LOCK
 LOG*
 CURRENT
 MANIFEST-*
+*.props
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 # some new files add by dxy
 examples/cifar10/*lmdb*
 examples/cifar10/*mat*
 
-=======
-=======
->>>>>>> windows
 #Visual Studio files
 *.user
 *.suo
 *.sdf
 *.opensdf
 *.pdb
-<<<<<<< HEAD
-*.props
->>>>>>> Add support for windows build
-=======
-*.props
->>>>>>> windows
+

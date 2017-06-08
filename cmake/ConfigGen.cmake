@@ -114,8 +114,6 @@ function(caffe_generate_export_configs)
     endforeach()
   endif()
 
-<<<<<<< HEAD
-=======
   set(GFLAGS_IMPORTED OFF)
   foreach(_lib ${GFLAGS_LIBRARIES})
     if(TARGET ${_lib})
@@ -159,7 +157,6 @@ function(caffe_generate_export_configs)
       endif()
     endforeach()
   endif()
->>>>>>> windows
 
   if(NOT HAVE_CUDNN)
     set(HAVE_CUDNN FALSE)
