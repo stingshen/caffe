@@ -12,8 +12,8 @@ fi
 BUILD=build/examples/FRCNN/demo_frcnn_api.bin
 
 $BUILD --gpu $gpu \
-       --model models/FRCNN/vgg16/test.prototxt \
-       --weights models/FRCNN/VGG16_faster_rcnn_final.caffemodel \
+       --model models/FRCNN/vgg16/test.proto \
+       --weights models/FRCNN/faster_rcnn_models/VGG16_faster_rcnn_final.caffemodel \
        --default_c examples/FRCNN/config/voc_config.json \
        --image_dir examples/FRCNN/images/  \
        --out_dir examples/FRCNN/results/ 
