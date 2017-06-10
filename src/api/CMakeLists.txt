@@ -18,6 +18,7 @@ set_target_properties(FRCNNapi PROPERTIES
 if(NOT MSVC)
   target_compile_definitions(gtest PUBLIC -DGTEST_USE_OWN_TR1_TUPLE)
 endif()
+add_dependencies(FRCNNapi caffeproto)
 install(DIRECTORY ${Caffe_INCLUDE_DIR}/api DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(TARGETS FRCNNapi EXPORT CaffeTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 #add_library(gtest_main gtest_main.cc)
