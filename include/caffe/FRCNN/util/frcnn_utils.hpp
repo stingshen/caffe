@@ -22,7 +22,9 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#if CV_VERSION_MAJOR <= 2
 #include <opencv2/contrib/contrib.hpp>
+#endif
 #include <boost/algorithm/string.hpp>
 #include "boost/filesystem.hpp"
 

@@ -44,16 +44,9 @@ void mxCHECK_FILE_EXIST(const char* file) {
 // The pointers to caffe::Solver and caffe::Net instances
 static vector<shared_ptr<Solver<float> > > solvers_;
 static vector<shared_ptr<Net<float> > > nets_;
-<<<<<<< HEAD
-// init_key is generated at the beginning and every time you call reset
-<<<<<<< HEAD
-=======
+
 // init_key is generated at the beginning and everytime you call reset
 #ifndef _MSC_VER  // We are not using MSVC.
->>>>>>> Add support for matcaffe build in Windows
-=======
-#ifndef _MSC_VER  // We are not using MSVC.
->>>>>>> windows
 static double init_key = static_cast<double>(caffe_rng_rand());
 #else  // We are using MSVC.
 // The original statement may cause MATLAB halt on Windows when cuBLAS is used.

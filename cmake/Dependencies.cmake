@@ -5,46 +5,16 @@ set(Caffe_DEFINITIONS "")
 set(Caffe_COMPILE_OPTIONS "")
 
 # ---[ Boost
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-find_package(Boost 1.46 REQUIRED COMPONENTS system thread filesystem)
-<<<<<<< HEAD
-=======
-find_package(Boost 1.55 REQUIRED COMPONENTS system thread filesystem)
->>>>>>> Bump boost version to 1.55 in CMake build
-=======
 find_package(Boost 1.54 REQUIRED COMPONENTS system thread filesystem)
->>>>>>> Downgrade boost requirement from 1.55 to 1.54
-=======
-find_package(Boost 1.54 REQUIRED COMPONENTS system thread filesystem)
->>>>>>> windows
 list(APPEND Caffe_INCLUDE_DIRS PUBLIC ${Boost_INCLUDE_DIRS})
 list(APPEND Caffe_DEFINITIONS PUBLIC -DBOOST_ALL_NO_LIB)
 list(APPEND Caffe_LINKER_LIBS PUBLIC ${Boost_LIBRARIES})
-<<<<<<< HEAD
-=======
-include_directories(SYSTEM ${Boost_INCLUDE_DIR})
-add_definitions(-DBOOST_ALL_NO_LIB)
-list(APPEND Caffe_LINKER_LIBS ${Boost_LIBRARIES})
->>>>>>> Merge cmake changes into latest windows branch
-
-if(DEFINED MSVC)
-  # We should define this only when necessary,
-  # i.e VS 2013 Update 4 or earlier.
-  add_definitions(-DBOOST_NO_CXX11_TEMPLATE_ALIASES)
-=======
-
-if(DEFINED MSVC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0.40629.0)
-  # Required for VS 2013 Update 4 or earlier.
-  list(APPEND Caffe_DEFINITIONS PUBLIC -DBOOST_NO_CXX11_TEMPLATE_ALIASES)
->>>>>>> Fixed wrong VS 2013 Update 5 version string. Fixes #5430
-endif()
 
 if(DEFINED MSVC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0.40629.0)
   # Required for VS 2013 Update 4 or earlier.
   list(APPEND Caffe_DEFINITIONS PUBLIC -DBOOST_NO_CXX11_TEMPLATE_ALIASES)
 endif()
+
 # ---[ Threads
 find_package(Threads REQUIRED)
 list(APPEND Caffe_LINKER_LIBS PRIVATE ${CMAKE_THREAD_LIBS_INIT})
@@ -79,10 +49,6 @@ list(APPEND Caffe_LINKER_LIBS PUBLIC ${GFLAGS_LIBRARIES})
 include(cmake/ProtoBuf.cmake)
 
 # ---[ HDF5
-<<<<<<< HEAD
-<<<<<<< HEAD
-find_package(HDF5 COMPONENTS HL REQUIRED)
-=======
 if(MSVC)
   # Find HDF5 using it's hdf5-config.cmake file with MSVC
   if(DEFINED HDF5_DIR)
@@ -94,24 +60,8 @@ if(MSVC)
 else()
   find_package(HDF5 COMPONENTS HL REQUIRED)
 endif()
->>>>>>> windows
 list(APPEND Caffe_INCLUDE_DIRS PUBLIC ${HDF5_INCLUDE_DIRS})
 list(APPEND Caffe_LINKER_LIBS PUBLIC ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
-=======
-if(MSVC)
-  # Find HDF5 using it's hdf5-config.cmake file with MSVC
-  if(DEFINED HDF5_DIR)
-    list(APPEND CMAKE_MODULE_PATH ${HDF5_DIR})
-  endif()
-  find_package(HDF5 COMPONENTS C HL REQUIRED)
-  set(HDF5_LIBRARIES hdf5-shared)
-  set(HDF5_HL_LIBRARIES hdf5_hl-shared)
-else()
-  find_package(HDF5 COMPONENTS HL REQUIRED)
-endif()
-include_directories(SYSTEM ${HDF5_INCLUDE_DIRS} ${HDF5_HL_INCLUDE_DIR})
-list(APPEND Caffe_LINKER_LIBS ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
->>>>>>> Merge cmake changes into latest windows branch
 
 # ---[ LMDB
 if(USE_LMDB)
@@ -240,11 +190,7 @@ if(BUILD_python)
   if(PYTHONLIBS_FOUND AND NUMPY_FOUND AND Boost_PYTHON_FOUND)
     set(HAVE_PYTHON TRUE)
     if(Boost_USE_STATIC_LIBS AND MSVC)
-<<<<<<< HEAD
-      add_definitions(-DBOOST_PYTHON_STATIC_LIB)
-=======
       list(APPEND Caffe_DEFINITIONS PUBLIC -DBOOST_PYTHON_STATIC_LIB)
->>>>>>> windows
     endif()
     if(BUILD_python_layer)
       list(APPEND Caffe_DEFINITIONS PRIVATE -DWITH_PYTHON_LAYER)

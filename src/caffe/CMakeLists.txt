@@ -56,7 +56,6 @@ endif()
 add_library(caffe ${srcs})
 caffe_default_properties(caffe)
 target_link_libraries(caffe ${Caffe_LINKER_LIBS})
-target_link_libraries(caffe FRCNNapi)
 target_include_directories(caffe ${Caffe_INCLUDE_DIRS}
                                  PUBLIC
                                  $<BUILD_INTERFACE:${Caffe_INCLUDE_DIR}>
@@ -101,31 +100,12 @@ configure_file(${caffe_export_hdr_in} ${caffe_export_hdr})
  add_subdirectory(test)
 
 # ---[ Install
-<<<<<<< HEAD
-<<<<<<< HEAD
-install(DIRECTORY ${Caffe_INCLUDE_DIR}/caffe DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-install(FILES ${proto_hdrs} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/caffe/proto)
-<<<<<<< HEAD
-install(TARGETS caffe proto EXPORT CaffeTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
-=======
-install(DIRECTORY ${Caffe_INCLUDE_DIR}/caffe DESTINATION include)
-install(FILES ${proto_hdrs} DESTINATION include/caffe/proto)
-install(TARGETS caffe proto EXPORT CaffeTargets DESTINATION lib)
-if(MSVC AND NOT BUILD_SHARED_LIBS)
-  install(FILES ${caffe_export_hdr} ${caffe_symbols_hdr} DESTINATION include/caffe)
-endif()
->>>>>>> Merge cmake changes into latest windows branch
-=======
-install(TARGETS caffe caffeproto EXPORT CaffeTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
->>>>>>> cmake: rename libproto.a -> libcaffeproto.a
-=======
 install(DIRECTORY ${Caffe_INCLUDE_DIR}/caffe DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES ${proto_hdrs} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/caffe/proto)
 install(TARGETS caffe caffeproto EXPORT CaffeTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 if(MSVC AND NOT BUILD_SHARED_LIBS)
   install(FILES ${caffe_export_hdr} ${caffe_symbols_hdr} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/caffe)
 endif()
->>>>>>> windows
 
 file(WRITE ${PROJECT_BINARY_DIR}/__init__.py)
 list(APPEND proto_python ${PROJECT_BINARY_DIR}/__init__.py)
