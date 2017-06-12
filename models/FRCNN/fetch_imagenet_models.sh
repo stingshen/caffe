@@ -3,7 +3,8 @@
 FILE=faster_rcnn_models.tgz
 #URL=https://dl.dropbox.com/s/gstw7122padlf0l/imagenet_models.tgz?dl=0
 URL=https://dl.dropboxusercontent.com/s/o6ii098bu51d139/faster_rcnn_models.tgz?dl=0
-CHECKSUM=ed34ca912d6782edfb673a8c3a0bda6d
+#CHECKSUM=ed34ca912d6782edfb673a8c3a0bda6d
+CHECKSUM=ac116844f66aefe29587214272054668
 
 if [ -f $FILE ]; then
   echo "File already exists. Checking md5..."
