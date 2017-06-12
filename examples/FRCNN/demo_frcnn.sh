@@ -4,7 +4,7 @@
 if [ ! -n "$1" ] ;then
     echo "no parameter, default is 0"
     gpu="--gpu 0"
-elif ["-no-gpu" == "$1"] ;then
+elif [ "-no-gpu" == "$1" ] ;then
     echo "don't use gpu"
     gpu=""
 else
@@ -12,7 +12,9 @@ else
     gpu="--gpu $1"
 fi
 
-source models/FRCNN/fetch_imagenet_models.sh
+pushd models/FRCNN/
+source fetch_imagenet_models.sh
+popd
 
 BUILD=build/examples/FRCNN/demo_frcnn_api.bin
 
